@@ -17,26 +17,25 @@ static Stream<String> get messagesStream => _messageStream.stream;
 static Future _backgroundHandler( RemoteMessage message ) async {
   // print(' onbackground Handler ${ message.messageId }');
   print( message.data );
-  _messageStream.add( message.notification?.body ?? 'No title' );
+  _messageStream.add( message.data['product'] ?? 'No data' );
 }
 
 static Future _onMessageHandler( RemoteMessage message ) async {
   // print('onMessage Handler ${ message.messageId }');
   print( message.data );
- _messageStream.add( message.notification?.body ?? 'No title' );
-
+  _messageStream.add( message.data['product'] ?? 'No data' );
 }
 
 static Future _onMessageOpenApp( RemoteMessage message ) async {
   // print('onMessagwOpenApp Handler ${ message.messageId }');
  print( message.data );
- _messageStream.add( message.notification?.body ?? 'No title' );
+ _messageStream.add( message.data['product'] ?? 'No data' );
 }
 
 
 static Future initializeApp() async {
 
-  // pushh notifications
+  // push notifications
   await Firebase.initializeApp();
   token = await FirebaseMessaging.instance.getToken();
   print('Token: $token');
